@@ -286,7 +286,8 @@ button:hover {
   background: white;
   color: black;
   padding: 0.5rem;
-  border-color: black;
+  border: 1px solid black;
+  cursor: pointer;
 }
 
 #contact form {
