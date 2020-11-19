@@ -47,6 +47,11 @@ h4 {
 	font-size: clamp(0.9rem, 1.9vw, 1.4rem);
 }
 
+p {
+	line-height: 1.3rem;
+	margin-bottom: 1.5rem;
+}
+
 section {
 	width: 100%;
 	display: flex;
@@ -103,6 +108,23 @@ button:hover {
 .heading {
 	padding: 0 0.5rem;
 	text-align: center;
+	margin: 1rem 0;
+	letter-spacing: -5px;
+}
+
+.expandText {
+	animation: expandText 2s ease-out forwards;
+
+	@keyframes expandText {
+		0% {
+			letter-spacing: -8px;
+			opacity: 0;
+		}
+		100% {
+			letter-spacing: 3px;
+			opacity: 1;
+		}
+	}
 }
 
 /*
@@ -113,6 +135,47 @@ button:hover {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 125%;
+}
+
+.title1 {
+	opacity: 0;
+	animation: fadeIn 2s ease-in forwards;
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}
+
+.title1,
+.title2,
+.title3 {
+	opacity: 0;
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}
+
+.title1 {
+	animation: 1.7s fadeIn forwards;
+}
+
+.title2 {
+	animation: 1.7s fadeIn 0.7s forwards;
+}
+
+.title3 {
+	animation: 1.7s fadeIn 1.4s forwards;
 }
 
 /*
@@ -222,6 +285,24 @@ button:hover {
 }
 
 /*
+        L A T E S T    N E W S
+*/
+#news {
+	h3 {
+		padding-bottom: 0.3rem;
+		color: rgb(170, 170, 170);
+	}
+
+	h4 {
+		padding-bottom: 0.3rem;
+	}
+
+	.content {
+		padding-bottom: 0;
+	}
+}
+
+/*
         B I O
 */
 #bio {
@@ -234,7 +315,6 @@ button:hover {
 		min-width: 250px;
 		height: auto;
 		padding-top: 0.5rem;
-		// align-self: center;
 	}
 }
 
@@ -245,6 +325,11 @@ button:hover {
 #contact {
 	max-width: $container-width;
 	width: 100%;
+
+	label {
+		display: inline-block;
+		margin: 0.3rem 0;
+	}
 
 	.content {
 		display: grid;
@@ -267,6 +352,7 @@ button:hover {
 		background: $form;
 		border: none;
 		margin-bottom: 0;
+		padding: 0.5rem;
 	}
 
 	button {
@@ -332,7 +418,6 @@ button:hover {
 		}
 
 		button {
-			// font-size: 0.8rem;
 			margin-right: 1rem;
 			margin-top: 1.8rem;
 			width: 100%;
@@ -376,6 +461,7 @@ button:hover {
 			img {
 				margin: 0 1rem;
 				padding: 0;
+				max-height: 250px;
 			}
 		}
 	}
@@ -384,5 +470,11 @@ button:hover {
 		.content {
 			align-content: space-between;
 		}
+	}
+}
+
+@media (min-width: 900px) {
+	p {
+		line-height: 1.5rem;
 	}
 }

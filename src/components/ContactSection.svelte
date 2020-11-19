@@ -1,9 +1,13 @@
 <script>
 	import axios from 'axios';
+	import * as Global from '../global.js';
+	import Inview from 'svelte-inview';
+
 	let formName = '';
 	let formEmail = '';
 	let formMessage = '';
 	let contactData = {};
+	let ref;
 
 	async function onSubmit(e) {
 		contactData = {
@@ -11,20 +15,30 @@
 			email: formEmail,
 			message: formMessage,
 		};
-		const res = await axios.post('http://localhost:1337/contacts', contactData, {
+		const res = await axios.post(Global.baseURL + '/contacts', contactData, {
 			headers: {
 				'content-type': 'application/json',
 			},
 		});
 
-		// console.table(contactData);
+		// Clear the form after send
+		formName = '';
+		formEmail = '';
+		formMessage = '';
+		contactData = {};
 	}
 </script>
 
-<section class="white-section">
+<section bind:this={ref} class="white-section">
 	<div id="contact">
 		<div class="container">
-			<h2 class="heading">Contact</h2>
+			<Inview let:inView wrapper={ref}>
+				{#if inView}
+					<h2 class="heading expandText">Join my mailing list</h2>
+				{:else}
+					<h2 class="heading">Join my mailing list</h2>
+				{/if}
+			</Inview>
 			<form class="content" on:submit|preventDefault={onSubmit}>
 				<div>
 					<label for="name">Name</label>

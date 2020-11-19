@@ -1,6 +1,18 @@
-<section class="red-section">
+<script>
+	import Inview from 'svelte-inview';
+
+	let ref;
+</script>
+
+<section bind:this={ref} class="red-section">
 	<div id="footer" class="container">
-		<h2 class="heading">Connect on social media</h2>
+		<Inview let:inView wrapper={ref}>
+			{#if inView}
+				<h2 class="heading expandText">Connect via social media</h2>
+			{:else}
+				<h2 class="heading">Connect via social media</h2>
+			{/if}
+		</Inview>
 		<div class="content">
 			<!-- Facebook icon -->
 			<div class="icon">

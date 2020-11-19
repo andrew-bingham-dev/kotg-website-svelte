@@ -1,27 +1,35 @@
 <script>
 	import { onMount } from 'svelte';
+	import Inview from 'svelte-inview';
 	import axios from 'axios';
+	import * as Global from '../global.js';
 
 	let error = null;
-	let baseURL = 'http://localhost:1337';
 	let bio = {};
 	let imageURL = '';
+	let ref;
 
 	onMount(async () => {
 		try {
-			const res = await axios.get('http://localhost:1337/bio');
+			const res = await axios.get(Global.baseURL + '/bio');
 			bio = res.data;
 		} catch (e) {
 			error = e;
 		}
 
-		imageURL = baseURL + bio.image.formats.small.url;
+		imageURL = Global.baseURL + bio.image.formats.small.url;
 	});
 </script>
 
-<section class="black-section">
+<section bind:this={ref} class="black-section">
 	<div id="bio" class="container">
-		<h2 class="heading">BIO</h2>
+		<Inview let:inView wrapper={ref}>
+			{#if inView}
+				<h2 class="heading expandText">BIO</h2>
+			{:else}
+				<h2 class="heading">BIO</h2>
+			{/if}
+		</Inview>
 		<div class="content">
 			{#if error !== null}
 				{error}

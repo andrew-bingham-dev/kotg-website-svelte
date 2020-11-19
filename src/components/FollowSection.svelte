@@ -1,7 +1,18 @@
-<!-- Follow section -->
-<section class="white-section">
+<script>
+	import Inview from 'svelte-inview';
+
+	let ref;
+</script>
+
+<section bind:this={ref} class="white-section">
 	<div id="follow" class="container">
-		<h2>Follow me on <span>Spotify</span></h2>
+		<Inview let:inView wrapper={ref}>
+			{#if inView}
+				<h2 class="heading expandText">Follow me on <span>Spotify</span></h2>
+			{:else}
+				<h2 class="heading">Follow me on <span>Spotify</span></h2>
+			{/if}
+		</Inview>
 		<div class="content">
 			<iframe
 				title="follow me"
